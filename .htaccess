@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /
+
+# Nếu yêu cầu bắt đầu bằng /api thì chuyển tiếp vào thư mục api (không động đến React)
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteRule ^api/(.*)$ api/$1 [QSA,L]
+
+# Nếu yêu cầu không phải file hoặc folder thì đưa về index.html (React SPA)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]
